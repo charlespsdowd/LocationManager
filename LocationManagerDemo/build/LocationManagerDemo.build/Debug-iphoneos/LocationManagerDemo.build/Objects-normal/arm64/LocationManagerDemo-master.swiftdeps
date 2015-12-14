@@ -1,0 +1,7 @@
+version: "Apple Swift version 2.1.1 (swiftlang-700.1.101.15 clang-700.1.81)"
+options: "db388dbf21fbbffff3a94e7bd2ab79fa"
+build_time: [503427693, 694525000]
+inputs:
+  "/Users/cpd/Documents/Development/LocationManager/LocationManager.swift": [503427428, 0]
+  "/Users/cpd/Documents/Development/LocationManager/LocationManagerDemo/LocationManagerDemo/AppDelegate.swift": [503427428, 0]
+  "/Users/cpd/Documents/Development/LocationManager/LocationManagerDemo/LocationManagerDemo/ViewController.swift": [503427693, 0]

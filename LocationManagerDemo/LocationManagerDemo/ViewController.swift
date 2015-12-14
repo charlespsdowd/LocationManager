@@ -36,7 +36,7 @@ class ViewController: UIViewController, LocationManagerDelegate, UITextFieldDele
     
     locationManager.autoUpdate = true
     
-    var address = "1 Infinite Loop, CA, USA"
+    let address = "1 Infinite Loop, CA, USA"
     
     textfield?.delegate = self
     textfield?.text = address
@@ -56,7 +56,7 @@ class ViewController: UIViewController, LocationManagerDelegate, UITextFieldDele
       locationManager.startUpdatingLocationWithCompletionHandler { (latitude, longitude, status, verboseMessage, error) -> () in
         
       if error != nil {
-          println(error)
+          print(error)
       } else {
           self.plotOnMapWithCoordinates(latitude: latitude, longitude: longitude)
         }
@@ -68,7 +68,7 @@ class ViewController: UIViewController, LocationManagerDelegate, UITextFieldDele
     
     activityIndicator.startAnimating()
     view.addSubview(activityIndicator)
-    var address = textfield?.text!
+    let address = textfield?.text!
     textfield?.resignFirstResponder()
     
     if sender.tag == 0 {
@@ -80,12 +80,12 @@ class ViewController: UIViewController, LocationManagerDelegate, UITextFieldDele
   
   func locationManagerStatus(status:NSString) {
 
-    println(status)
+    print(status)
   }
   
   func locationManagerReceivedError(error:NSString) {
     
-    println(error)
+    print(error)
     activityIndicator.stopAnimating()
   }
   
@@ -117,7 +117,7 @@ class ViewController: UIViewController, LocationManagerDelegate, UITextFieldDele
       self.performActionWithPlacemark(placemark, error: error)        }
   }
   
-  func plotOnMapWithCoordinates(#latitude: Double, longitude: Double) {
+  func plotOnMapWithCoordinates(latitude latitude: Double, longitude: Double) {
     
     locationManager.reverseGeocodeLocationUsingGoogleWithLatLon(latitude: latitude, longitude: longitude) { (reverseGeocodeInfo, placemark, error) -> Void in
       
@@ -130,7 +130,7 @@ class ViewController: UIViewController, LocationManagerDelegate, UITextFieldDele
     
     if error != nil {
       
-      println(error)
+      print(error)
       
       dispatch_async(dispatch_get_main_queue(), { () -> Void in
         
@@ -147,13 +147,13 @@ class ViewController: UIViewController, LocationManagerDelegate, UITextFieldDele
     }
   }
   
-  func removeAllPlacemarkFromMap(#shouldRemoveUserLocation:Bool) {
+  func removeAllPlacemarkFromMap(shouldRemoveUserLocation shouldRemoveUserLocation:Bool) {
     
     if let mapView = self.mapView {
       for annotation in mapView.annotations{
         if shouldRemoveUserLocation {
           if annotation as? MKUserLocation !=  mapView.userLocation {
-            mapView.removeAnnotation(annotation as! MKAnnotation)
+            mapView.removeAnnotation(annotation )
           }
         }
       }
@@ -180,10 +180,10 @@ class ViewController: UIViewController, LocationManagerDelegate, UITextFieldDele
     
     var latitudinalMeters = 100.0
     var longitudinalMeters = 100.0
-    var theRegion:MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(placemark!.location.coordinate, latitudinalMeters, longitudinalMeters)
+    var theRegion:MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(placemark!.location!.coordinate, latitudinalMeters, longitudinalMeters)
     
     self.mapView?.setRegion(theRegion, animated: true)
     
-    self.mapView?.addAnnotation(MKPlacemark(placemark: placemark))
+    self.mapView?.addAnnotation(MKPlacemark(placemark: placemark!))
   }
 }
